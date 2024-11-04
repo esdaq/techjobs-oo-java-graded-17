@@ -91,7 +91,12 @@ public class Job {
 
     @Override
     public String toString(){
-        return System.lineSeparator() + "ID:" + this.getId() + System.lineSeparator();
+        return System.lineSeparator() + "ID: " + this.getId() + System.lineSeparator() +  "Name: " +
+                (this.getName().isEmpty() ? "Data not available" : this.getName()) + System.lineSeparator() +  "Employer: " +
+                (this.getEmployer().getValue().isEmpty() ? "Data not available" : this.getEmployer().getValue()) +
+                System.lineSeparator() + "Location: " + (this.getLocation().getValue().isEmpty() ? "Data not available" : this.getLocation().getValue()) + System.lineSeparator() +
+                "Position Type: " + (this.getPositionType().getValue().isEmpty() ? "Data not available" : this.getPositionType().getValue()) + System.lineSeparator() + "Core Competency: " +
+                (this.getCoreCompetency().getValue().isEmpty() ? "Data not available" : this.getCoreCompetency().getValue()) + System.lineSeparator();
     }
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields

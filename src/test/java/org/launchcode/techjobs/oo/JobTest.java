@@ -43,17 +43,42 @@ public class JobTest {
         assertEquals(job1.equals(job2), false);
     }
 
+
     @Test
     public void testToStringStartsAndEndsWithNewLine() {
         Job job = new Job("Product tester", new Employer("ACME"),
                 new Location("Desert"), new PositionType("Quality control"),
                 new CoreCompetency("Persistence"));
+        String result = job.toString();
+        assertEquals(String.valueOf(result.charAt(result.length() - 1)), System.lineSeparator());
+        assertEquals(String.valueOf(result.charAt(0)), System.lineSeparator());
+    }
 
-        assertEquals(job.toString(),System.lineSeparator() + "ID:" + job.getId() + System.lineSeparator() +
-                "Name:" + job.getName()+  System.lineSeparator() +
-                "Employer:" + job.getEmployer().getValue() + System.lineSeparator() +
-                "Location:"+ job.getLocation().getValue() + System.lineSeparator() +
-                "Position Type: \n" + System.lineSeparator() +
-                "Core Competency: \n" + System.lineSeparator());
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job = new Job("Product tester", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        assertEquals(job.toString(),System.lineSeparator() + "ID: " + job.getId() + System.lineSeparator() +
+                "Name: " + job.getName() +  System.lineSeparator() +
+                "Employer: " + job.getEmployer().getValue() + System.lineSeparator() +
+                "Location: "+ job.getLocation().getValue() + System.lineSeparator() +
+                "Position Type: " + job.getPositionType().getValue() + System.lineSeparator() +
+                "Core Competency: " + job.getCoreCompetency().getValue() + System.lineSeparator());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job job = new Job("", new Employer(""),
+                new Location(""), new PositionType(""),
+                new CoreCompetency(""));
+
+        assertEquals(job.toString(),System.lineSeparator() + "ID: " + job.getId() + System.lineSeparator() +
+                "Name: " + "Data not available" +  System.lineSeparator() +
+                "Employer: " + "Data not available" + System.lineSeparator() +
+                "Location: "+ "Data not available" + System.lineSeparator() +
+                "Position Type: " + "Data not available" + System.lineSeparator() +
+                "Core Competency: " + "Data not available" + System.lineSeparator());
     }
 }
